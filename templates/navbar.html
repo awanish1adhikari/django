@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <a class="navbar-brand" href="#">Sopify</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="btn btn-secondary mx-2 nav-info {{home}}" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-secondary mx-2 nav-info {{shopping}}" href="/shopping">Shop </a>
+            </li>
+
+            {% if user.is_authenticated %}
+             <li class="nav-item">
+                <img class="img rounded-circle mx-2 nav-info" src="{{request.user.profile.profile_pic.url}}"/>
+            </li>
+             <li class="nav-item">
+                <a class=" mx-2 nav-info" href="/account/profile">{{request.user.username}}</a>
+            </li>
+            <li class="nav-item text-left">
+                <a class="btn btn-info py-1 mx-5 nav-info" href="/account/logout">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="btn btn-secondary mx-2 nav-info" href="/account">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-secondary mx-2 nav-info" href="/account/register">Register</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
