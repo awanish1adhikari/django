@@ -1,0 +1,39 @@
+{% extends 'admin_layout.html' %}
+{% load bootstrap %}
+{% block title %}
+<title>Add User</title>
+{% endblock%}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center">Our Users</h1>
+    <div class="table-responsive">
+        <table class="table table-hover table-stripped">
+          <thead class="thead-dark">
+            <tr>
+              <th >Profile Pic</th>
+              <th >Username</th>
+              <th >Update user to Admin</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for i in profiles %}
+            <tr>
+              <td><img class="img rounded-circle mx-2 nav-info" style="height: 50px; width: 50px;" src="{{i.profile_pic.url}}"/></td>
+              <td>{{i.username}}</td>
+                {% if i.staff == False %}
+              <td><a href="/admin/update-user-to-admin/{{i.id}}"
+                               class="btn btn-warning btn-sm" onclick="return confirm('Are you sure want to update this user?')">
+                            Update to Admin</a></td>
+                {% else %}
+                <td> Admin User</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

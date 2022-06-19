@@ -1,0 +1,41 @@
+{% extends 'admin_layout.html' %}
+{% load bootstrap %}
+{% block title %}
+<title>Add Product</title>
+{% endblock%}
+
+{% block content %}
+
+<div class="container-fluid">
+    <h1 class="text-center">Our Orders</h1>
+    <div class="table-responsive">
+        <table class="table table-hover table-stripped">
+          <thead class="thead-dark">
+            <tr>
+              <th >Username</th>
+              <th >Product Name</th>
+              <th >Quantity</th>
+              <th >Phone Number</th>
+              <th> Address</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for i in orders %}
+            <tr>
+              <td>{{i.username}}</td>
+              <td>{{i.product_name}}</td>
+              <td>{{i.quantity}}</td>
+              <td>{{i.phone_number}}</td>
+              <td>{{i.address}}</td>
+              <td>
+                  <a href="/admin/deleteOrder/{{i.id}}" class="btn btn-danger"  onclick="return confirm('Are you sure want to delete this order?')">Delete</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

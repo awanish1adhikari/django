@@ -1,0 +1,62 @@
+{% extends 'admin_layout.html' %}
+{% load bootstrap %}
+{% block title %}
+<title>Add Product</title>
+{% endblock%}
+
+{% block content %}
+<div class="container">
+   {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <h6 class="success_message py-3 px-1 my-2 text-center">{{message}}</h6>
+    {% endif %}
+
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+    <h6 class="error_message py-3 px-1 my-2 text-center">{{message}}</h6>
+    {% endif %}
+    {% endfor %}
+    <h1 class="text-center">Add New Product</h1>
+    <div class="card py-2 px-2">
+        <form class="form" action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | bootstrap_horizontal}}
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <h1 class="text-center">Our Products</h1>
+    <div class="table-responsive">
+        <table class="table table-hover table-stripped">
+          <thead class="thead-dark">
+            <tr>
+              <th >Image</th>
+              <th >Name</th>
+              <th >Price</th>
+              <th >Quantity</th>
+              <th> Made in Country</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for i in products %}
+            <tr>
+              <td><img class="img rounded mx-2 nav-info" style="height: 50px; width: 50px;" src="{{i.image_url.url}}"/></td>
+              <td>{{i.name}}</td>
+              <td>Rs.{{i.price}}</td>
+              <td>{{i.quantity}}</td>
+              <td>{{i.made_in_country}}</td>
+              <td>
+                  <a href="/admin/updateProduct/{{i.id}}" class="btn btn-warning">Update</a>
+                  <a href="/admin/deleteProduct/{{i.id}}" class="btn btn-danger"  onclick="return confirm('Are you sure want to delete this product?')">Delete</a></td>
+
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
